@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" >
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WEB Application Example</title>
+
+  <!-- If you are using the CSS version, only link these 2 files, you may add app.css to use for your overrides if you like -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/foundation.css">
+
+  <!-- If you are using the gem version, you need this only -->
+ 
+
+  <script src="js/vendor/modernizr.js"></script>
+  <script>
+function getInfo()
+{
+
+    //Verification from w3schools
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+      {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+      }
+    else
+      {// code for IE6, IE5
+      xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+      }
+
+
+
+    xmlhttp.onreadystatechange=function()
+      {
+       //The Loading...function 
+      if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+        document.getElementById("where").innerHTML=xmlhttp.responseText;
+        }
+
+
+      }
+      
+
+      var ticket=document.getElementById('travel').value;
+
+
+      //var sincache = new Date().getTime(); 
+      //var looking="travel.php?cache="+sincache;
+      //console.log(looking);
+
+      var miTexto=document.getElementById('travel').value;
+      var tex2 = document.getElementById('travel2').value;
+
+      console.log(ticket);
+      //xmlhttp.open("GET","travel.php",true);
+
+      xmlhttp.open("GET","travel.php?dato="+miTexto+"&dato2="+tex2,true);
+      xmlhttp.send();
+}
+  </script>
+
+
+</head>
+<body>
+
+  <!-- body content here -->
+
+<div class="row">
+  <div class="small-4 columns">
+
+    <form>
+    <label>Input Label
+        <input id="travel" type="text" placeholder="Safe and Sound" />
+    </label>
+    <input id="travel2" type="text" placeholder="Safe and Sound" />
+    <a href="#"  onclick='getInfo()' class="button postfix">Go</a>
+    </form>
+  <p id="where">
+
+
+  </p>
+
+
+  </div>
+  <div class="small-8 columns">Content</div>
+</div>
+
+  <script src="js/vendor/jquery.js"></script>
+  <script src="js/foundation.min.js"></script>
+  <script>
+    $(document).foundation();
+  </script>
+</body>
+</html>

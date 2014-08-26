@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" >
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WEB Application Example</title>
+
+  <!-- If you are using the CSS version, only link these 2 files, you may add app.css to use for your overrides if you like -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/foundation.css">
+
+  <!-- If you are using the gem version, you need this only -->
+ 
+
+  <script src="js/vendor/modernizr.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/cartelera.js"></script>
+
+
+</head>
+<body>
+
+  <!-- body content here -->
+
+<div class="row">
+  <div class="small-4 columns">
+
+    <form>
+    <input id="title" type="text" placeholder="Nombre" />
+    <center>
+      Año<br>
+      2013 <input type="range" min="2013" max="2014" id="year"> 2014
+    </center>
+    <select id="classif">
+      <option value="NA">Selecciona un País de Origen</option>
+      <option value="EUA">Estados Unidos</option>
+      <option value="R">Resto del Mundo</option>
+    </select>
+    <input type="checkbox" value="AA" name="classifArray[]"> AA<br>
+    <input type="checkbox" value="A" name="classifArray[]"> A<br>
+    <input type="checkbox" value="B" name="classifArray[]"> B<br>
+    <input type="checkbox" value="B15" name="classifArray[]"> B-15<br>
+    <input type="checkbox" value="C" name="classifArray[]"> C<br>
+    <input type="checkbox" value="D" name="classifArray[]"> D<br>
+
+    <a href="#"  onclick='filterInformation()' class="button postfix">Filtrar</a>
+    </form>
+  </div>
+  <div class="small-8 columns">
+
+    <p id="cartelera">
+
+
+
+    </p>
+
+
+  </div>
+</div>
+
+  <script src="js/vendor/jquery.js"></script>
+  <script src="js/foundation.min.js"></script>
+  <script>
+    $(document).foundation();
+  </script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" >
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WEB Application Example</title>
+
+  <!-- If you are using the CSS version, only link these 2 files, you may add app.css to use for your overrides if you like -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/foundation.css">
+
+  <!-- If you are using the gem version, you need this only -->
+ 
+
+  <script src="js/vendor/modernizr.js"></script>
+  <script>
+
+
+  </script>
+
+
+</head>
+<body>
+
+  <!-- body content here -->
+
+<div class="row">
+  <div class="small-4 columns">
+
+    <form>
+    <label>Input Label
+        <input id="travel" type="text" placeholder="Safe and Sound" />
+    </label>
+    <a href="#"  onclick='getInfo()' class="button postfix">Go</a>
+
+    <a href="#" class="button" data-dropdown="drop">Your favorite drinks</a>
+<ul id="drop" class="small f-dropdown" data-dropdown-content>
+  <li><a  id="d1"   href="#">Agua de Guayaba</a></li>
+  <li><a  id="d2"  href="#">Tejuino</a></li>
+  <li><a  id="d3"  href="#">Malteada de Chocolate</a></li>
+</ul>
+    </form>
+  
+
+
+  </div>
+  <div class="small-8 columns">Content
+    <ul class="clearing-thumbs" data-clearing>
+  <li><a href="http://placehold.it/400x400&text=[agua]"><img id="img1" src="http://placehold.it/200x400&text=[agua]"></a></li>
+  <li><a href="http://placehold.it/400x400&text=[tejuino]"><img src="http://placehold.it/200x400&text=[tejuino]"></a></li>
+  <li><a href="http://placehold.it/200x400&text=[malteada]"><img src="http://placehold.it/200x400&text=[malteada]"></a></li>
+</ul>
+<p id="where">
+
+
+  </p>
+  </div>
+</div>
+
+  <script src="js/vendor/jquery.js"></script>
+  <script src="js/foundation.min.js"></script>
+  <script>
+    $(document).foundation();
+
+
+    $(document).ready(function(){
+        $("#drop > li > a").click(function(){
+        console.log("ajax with jquery");
+        console.log(this.id);
+      
+        $("#where").load("drinkspost.php",{dato:this.id}, function(response) {
+            
+            //alert( "We are here" );
+            
+            $("#img1").attr("src", response);
+
+        });
+      });
+    });
+  </script>
+</body>
+</html>
