@@ -28,22 +28,22 @@
   <div class="small-4 columns">
 
     <form>
-    <input id="title" type="text" placeholder="Nombre" />
+    <input id="title" onchange='filterInformation()' type="text" placeholder="Nombre" />
     <center>
       Año<br>
-      2013 <input type="range" min="2013" max="2014" id="year"> 2014
+      2013 <input onchange='filterInformation()' type="range" min="2013" max="2014" id="year"> 2014
     </center>
-    <select id="classif">
+    <select id="classif" onchange='filterInformation()'>
       <option value="NA">Selecciona un País de Origen</option>
       <option value="EUA">Estados Unidos</option>
       <option value="R">Resto del Mundo</option>
     </select>
-    <input type="checkbox" value="AA" name="classifArray[]"> AA<br>
-    <input type="checkbox" value="A" name="classifArray[]"> A<br>
-    <input type="checkbox" value="B" name="classifArray[]"> B<br>
-    <input type="checkbox" value="B15" name="classifArray[]"> B-15<br>
-    <input type="checkbox" value="C" name="classifArray[]"> C<br>
-    <input type="checkbox" value="D" name="classifArray[]"> D<br>
+    <input onchange='filterInformation()' type="checkbox" value="AA" name="classifArray[]"> AA<br>
+    <input onchange='filterInformation()' type="checkbox" value="A" name="classifArray[]"> A<br>
+    <input onchange='filterInformation()' type="checkbox" value="B" name="classifArray[]"> B<br>
+    <input onchange='filterInformation()' type="checkbox" value="B15" name="classifArray[]"> B-15<br>
+    <input onchange='filterInformation()' type="checkbox" value="C" name="classifArray[]"> C<br>
+    <input onchange='filterInformation()' type="checkbox" value="D" name="classifArray[]"> D<br>
 
     <a href="#"  onclick='filterInformation()' class="button postfix">Filtrar</a>
     </form>

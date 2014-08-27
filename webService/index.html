@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Pic My City</title>
+		<style>
+		#tutorialButton{
+			position: fixed;
+			float:right;
+		  	right: 20px; /*change this to fit your layout */
+		}
+		</style>
+
+
+		<!-- Bootstrap CSS -->
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+	</head>
+	<body>
+
+		<div id="tutorialButton">
+			<a href="tutorial.html" target="_blank">
+				<button type="button" class="btn btn-primary btn-lg">
+					Tutorial
+				</button>
+			</a>
+		</div>
+		
+
+		<h1 class="text-center">Pic My City</h1>
+
+		<input type="range" id="inputPics" onchange='changePics()' class="form-control" value="55" min="10" max="100" step="1" required="required" title="Número de Fotos">
+		<div id="val"></div>
+		
+		<div class="container" id="pics">
+			
+		</div>
+		<!-- jQuery -->
+		<script src="js/jquery.js"></script>
+		<!-- Bootstrap JavaScript -->
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/read.js"></script>
+	</body>
+</html>
