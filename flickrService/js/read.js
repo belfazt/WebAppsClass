@@ -2,6 +2,7 @@ var informationArray;
 var photos;
 var picsHTML;
 var imgLink;
+
 $.ajax({
 
       url: "api.php",
@@ -39,7 +40,37 @@ $.ajax({
     });
 
 
+function reloadJSON(text, callback){
+  
+  $.ajax({
+      url: "api.php?filter="+text,
+      dataType: "json",
+      success: function(response) {
+        console.log("api.php?filter="+text);
+        informationArray = response;
+        photos = informationArray.photos.photo;
+        callback();
+        //photos = shuffle(photos);
+        //console.log(photos);
+    }
+  });
+  
+}
 function changePics(){
+  var text = document.getElementById("filter").value;
+  
+
+  if (text != ""){
+    reloadJSON(text, function() {
+      changer();
+    });
+  }
+  else{
+    changer();
+  }
+}
+
+function changer(){
   var pics = document.getElementById("inputPics").value;
   //console.log(pics);
   document.getElementById("pics").innerHTML = "";

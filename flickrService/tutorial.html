@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tutorial Pic My City</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <style type="text/css">
+
+    img {
+      max-width: 60%;
+      display: block;
+      height: auto;
+    }
+    p {
+      padding-bottom: 25px;
+    }
+    </style>
+
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header">
+        <h3 class="text-muted">Tutorial PicMyCity</h3>
+      </div>
+
+      <p>
+        Antes de comenzar:
+        <ol>
+          <li>Tener instalado <a href="https://www.apachefriends.org/index.html">XAMPP</a> para ejecutar nuestra pagina.</li>
+          <li>Ejecutar los servicios de apache usando el control panel de XAMPP</li>
+          <li>Instalar MongoDB y su extension PHP</li>
+        </ol>
+
+      </p>
+
+      <p>
+       Paso 1. Buscar el feed de nuestro servicio
+       <img src="img/img1.png">
+       <a href="https://www.flickr.com/services/api/flickr.photos.search.html">https://www.flickr.com/services/api/flickr.photos.search.html</a>
+      </p>
+
+      <p>
+       Paso 2. Hacer la busqueda del codigo XML con el criterio de busqueda: Guadalajara y relevancia
+       <img src="img/img2.png">
+       <a href="https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=d31b0fb59fcc91253ca0898627743553&text=guadalajara&sort=relevance&format=rest">https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=d31b0fb59fcc91253ca0898627743553&text=guadalajara&sort=relevance&format=rest</a>
+      </p>
+
+      <p>
+      Paso 3. Convertir el XML a JSON usando funciones de PHP
+      </p>
+      <pre>
+        $xml = simplexml_load_string($output);
+        $json = json_encode($xml);
+      </pre>
+
+      <p>
+      Paso 4. Cargar el JSON directamente del servicio
+      </p>
+      <pre>
+      $.ajax({
+        url: "api.php",
+        dataType: "json",
+        success: function(response) {
+          // renderizar response
+        }
+      });
+      </pre>
+
+      <p>
+      Paso 5. Insertar el JSON en MongoDB
+      <img src="img/img3.png">
+      Usamos el siguiente codigo para ingresar los datos a mongo:
+      </p>
+      <pre>
+        $m = new MongoClient();
+
+        $db = $m->jsonAPI;
+        $collection = $db->flickr;
+
+        $doc = json_decode($json,true);
+        $doc = $doc ["photos"]["photo"];
+        foreach ($doc as $item) {
+          $collection->insert($item["@attributes"]);
+        }
+      </pre>
+
+      <div class="footer">
+        <p>&copy; Alvaro Laguna, Pablo Fierro, Diego Camargo</p>
+      </div>
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  </body>
+</html>

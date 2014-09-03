@@ -22,7 +22,7 @@
 
 		<div id="tutorialButton">
 			<a href="tutorial.html" target="_blank">
-				<button type="button" class="btn btn-primary btn-lg">
+				<button type="button" class="btn btn-danger btn-lg">
 					Tutorial
 				</button>
 			</a>
@@ -31,7 +31,21 @@
 
 		<h1 class="text-center">Pic My City</h1>
 
-		<input type="range" id="inputPics" onchange='changePics()' class="form-control" value="55" min="10" max="100" step="1" required="required" title="Número de Fotos">
+
+		<center>
+		<form class="form-inline" role="form">
+			<div class="form-group">
+				<label class="sr-only" for="">label</label>
+				<input type="text" class="form-control" id="filter" onchange='changePics()' placeholder="Búsqueda">
+				<input type="range" id="inputPics" onchange='changePics()' class="form-control" value="55" min="10" max="100" step="1" required="required" title="Número de Fotos">
+			</div>
+			<a href="#" onclick='changePics()' class="btn btn-primary">Go</a>
+		</center>
+		
+			
+		
+			
+		
 		<div id="val"></div>
 		
 		<div class="container" id="pics">

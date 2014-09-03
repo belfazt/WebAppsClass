@@ -2,7 +2,13 @@
 
 	header('Content-Type: application/json');
 	header('Access-Control-Allow-Origin: *');
-	$url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=10e93e713dd6b58254bb75310e29f43b&text=guadalajara&sort=relevance&format=rest&api_sig=bfaf4db05f5090473ec6d053252dc16b";	
+	if(isset($_GET["filter"])){
+		$url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=d31b0fb59fcc91253ca0898627743553&text=".$_GET["filter"]."&sort=relevance&format=rest";	
+	}
+	else{
+		$url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=d31b0fb59fcc91253ca0898627743553&text=guadalajara&sort=relevance&format=rest";		
+	}
+	
 	
 	// create curl resource 
 	$ch = curl_init();
