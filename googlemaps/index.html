@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map_canvas { height: 100% }
+    </style>
+    <script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCAjefipTpSaQ_yYYyvPcsmQkVVhca_jqc&sensor=true">
+    </script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"
+        type="text/javascript"></script>
+    <script type="text/javascript">
+     
+      //Tomado de los tutoriales de google maps api v3
+
+      function initialize() {
+
+
+        //
+        var mapOptions = {
+          center: new google.maps.LatLng(20.6383359,-103.3467188),
+          zoom: 5,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        var map = new google.maps.Map(document.getElementById("map_canvas"),
+            mapOptions);
+
+
+//Obtain location from user
+
+
+         navigator.geolocation.getCurrentPosition(function(position) {
+      initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+      map.setCenter(initialLocation);
+    });
+
+
+   
+
+//Listener for click event
+google.maps.event.addListener(map, 'click', function(event) {
+      
+        var latitude = event.latLng.lat();
+        var longitude = event.latLng.lng();
+        console.log( latitude + ', ' + longitude );
+        $('#data').html( "datos" );
+        
+  });
+
+
+/*
+//Another event
+var lugar = $('#data')[0];;
+console.log(lugar);
+google.maps.event.addDomListener(lugar, 'click', moves);
+
+*/
+
+var triangleCoords = [
+      new google.maps.LatLng(25.774252, -80.190262),
+      new google.maps.LatLng(18.466465, -66.118292),
+      new google.maps.LatLng(32.321384, -64.75737)
+  ];
+
+  // Construct the polygon.
+  bermudaTriangle = new google.maps.Polygon({
+    paths: triangleCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: 0.8,
+    strokeWeight: 3,
+    fillColor: '#FF0000',
+    fillOpacity: 0.35
+  });
+
+  bermudaTriangle.setMap(map);
+
+
+
+$.ajax({
+type: "GET",
+url: "estados.kml",
+dataType: "xml",
+success: function(xml) {
+ //console.log(xml);
+ $(xml).find('Polygon').each(function(){
+
+    var statesCoords = [];
+    var coordsText=$(this).find('coordinates').text();
+    var coordsSplit = coordsText.split(",0 ");
+    var coordsSplitSplit = [];
+    //console.log(coordsSplit)
+    for (var i = 0; i < coordsSplit.length; i++) {
+      coordsSplitSplit = coordsSplit[i].split(",");
+      var insert = new google.maps.LatLng(parseFloat(coordsSplitSplit[1]),parseFloat(coordsSplitSplit[0]));
+      statesCoords.push(insert);
+      
+    }
+    statesCoords.pop();
+    //console.log(statesCoords.toString());
+
+
+
+    
+
+ mexico = new google.maps.Polygon({
+    paths: statesCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: 0.4,
+    strokeWeight: 1,
+    fillColor: randomColor(),
+    fillOpacity: 0.35
+  });
+
+
+
+google.maps.event.addListener(mexico,"mouseover",function(){
+ this.setOptions({fillColor: randomColor()});
+}); 
+
+google.maps.event.addListener(mexico,"mouseout",function(){
+ this.setOptions({fillColor: randomColor()});
+});
+
+    mexico.setMap(map);
+   
+
+ });
+}
+});
+
+      }
+
+
+function randomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+
+function moves(){
+
+  console.log("moves");
+}
+
+    </script>
+  </head>
+  <body onload="initialize()">
+    <!--<div id="data">Ejemplo</div>-->
+    <div id="map_canvas" style="width:100%; height:100%"></div>
+    
+  </body>
+</html>
