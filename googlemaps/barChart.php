@@ -20,6 +20,7 @@ function random_color() {
 
 
 echo "<svg width='100%' height='90%' version='1.1' xmlns='http://www.w3.org/2000/svg'>";
+
 for ($i=0; $i <count($info) ; $i++) { 
 	$width = 60;
 	$pos = $i*$width;
@@ -36,5 +37,6 @@ echo "</svg>";
 ?>
 <script type="text/javascript">
 	window.location.reload();
+
 </script>
 </body>
