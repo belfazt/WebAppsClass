@@ -1,4 +1,5 @@
 <?php
+	header('Content-Type: application/json');
 	$link = mysqli_connect("localhost","superuser","bestpass123","cartelera") or die ("Error ".mysqli_error($link));
 
 	$query = "SELECT * FROM peliculas";
